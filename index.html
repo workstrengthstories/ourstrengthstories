@@ -102,7 +102,9 @@ p.lead{font-size:clamp(15px,3.2vw,19px);color:var(--muted)}
 .grid{display:grid;gap:26px}
 @media(min-width:901px){.cols-2{grid-template-columns:1.1fr .9fr}}
 @media(min-width:900px){.cols-3{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:1024px){#team .grid { grid-template-columns: repeat(4, 1fr);}
+@media(min-width:1024px){
+  #team .grid { grid-template-columns: repeat(4, 1fr);}
+}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);transform-style:preserve-3d;transition:background-color .3s,border-color .3s}
 .pad{padding:22px}
 .pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:#fff;color:#3d4b61;border:1px solid var(--line)}
@@ -110,7 +112,7 @@ p.lead{font-size:clamp(15px,3.2vw,19px);color:var(--muted)}
 .row{display:flex;gap:12px;flex-wrap:wrap}
 .ratio{position:relative;width:100%;padding-top:56.25%;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff}
 [data-theme="dark"] .ratio{background:#0f1726}
-.ratio>iframe{position:absolute;inset:0;width:100%;height:100%}
+.ratio>iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
 /* Stats */
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
@@ -179,7 +181,7 @@ filter:saturate(115%) blur(6px);animation:cloudFlow 16s ease-in-out infinite alt
 
     <!-- Hamburger (≤1024px) -->
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
-    
+
     <!-- Desktop links -->
     <div class="links">
       <a class="link" href="#mission">Mission</a>
@@ -226,13 +228,22 @@ filter:saturate(115%) blur(6px);animation:cloudFlow 16s ease-in-out infinite alt
     <div class="card reveal" data-tilt>
       <div class="pad">
         <div class="pill">Research-backed • Simple Language</div>
+
+        <!-- ✅ FIXED: use /embed/ not watch?v= -->
         <div class="ratio" style="margin-top:12px">
-          <iframe src="https://www.youtube.com/watch?v=4_LV90ms5gQ" title="Healthy Diet Secrets | Nutrition, PCOS, Weight Loss - Lifestyle Tips | Is fat really bad? | Our Strength Stories"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+          <iframe
+            src="https://www.youtube.com/embed/4_LV90ms5gQ"
+            title="Healthy Diet Secrets | Nutrition, PCOS, Weight Loss - Lifestyle Tips | Is fat really bad? | Our Strength Stories"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"></iframe>
         </div>
+
         <div class="row" style="justify-content:space-between; margin-top:10px">
           <small class="lead" style="font-size:14px">Healthy Diet Secrets | Nutrition, PCOS, Weight Loss & Lifestyle Tips | Is fat really bad?</small>
-          <a class="pill" href="https://www.youtube.com/watch?v=VkzyMBExLs0" target="_blank" rel="noopener">Open on YouTube ↗</a>
+
+          <!-- ✅ FIXED: link now matches the same video -->
+          <a class="pill" href="https://www.youtube.com/watch?v=4_LV90ms5gQ" target="_blank" rel="noopener">Open on YouTube ↗</a>
         </div>
       </div>
     </div>
@@ -358,16 +369,17 @@ filter:saturate(115%) blur(6px);animation:cloudFlow 16s ease-in-out infinite alt
           <div style="color:var(--muted);font-size:14px;text-align:center"><b>Official Host <br/>Co-Founder, Our Strength Stories</b></div>
         </div>
       </div>
-       <div class="card reveal" data-tilt>
+
+      <div class="card reveal" data-tilt>
         <div style="width:180px;height:180px;border-radius:50%;overflow:hidden;margin:14px auto 0;border:1px solid var(--line);background:var(--paper);box-shadow:0 8px 24px rgba(0,0,0,.08);">
           <img src="SP.png" alt="Sonia Pahuja" style="width:100%;height:100%;object-fit:cover;object-position:center;">
         </div>
         <div class="pad">
           <div style="font-weight:900;font-size:18px;text-align:center">Sonia Pahuja</div>
-          <div style="color:var(--muted);font-size:14px;text-align:center"><b>Creative Head </div>
+          <div style="color:var(--muted);font-size:14px;text-align:center"><b>Creative Head</b></div>
         </div>
       </div>
-      
+
     </div>
   </div>
 </section>
@@ -432,7 +444,9 @@ menuBtn.addEventListener('click',()=>{const open=mobileMenu.classList.toggle('op
 mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('open');menuBtn.setAttribute('aria-expanded','false')}));
 
 // Lenis + GSAP
-const lenis=new Lenis({lerp:.09,wheelMultiplier:1.05});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf);
+const lenis=new Lenis({lerp:.09,wheelMultiplier:1.05});
+function raf(t){lenis.raf(t);requestAnimationFrame(raf)}
+requestAnimationFrame(raf);
 gsap.registerPlugin(ScrollTrigger);
 
 // Disable tilt on touch
